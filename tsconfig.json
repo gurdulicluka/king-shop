@@ -1,0 +1,16 @@
+{
+	"compilerOptions": {
+		"jsx": "react-jsx",
+		"module": "ESNext",
+		"skipLibCheck": true,
+		"moduleResolution": "Bundler",
+		"types": ["vite/client"],
+		"allowImportingTsExtensions": true,
+		"noEmit": true,
+		"paths": {
+			"@/*": ["./src/*"]
+		}
+	},
+	"include": ["src/**/*"],
+	"exclude": ["node_modules", "dist"]
+}
