@@ -1,7 +1,8 @@
 import { Group } from "@mantine/core";
-import Cart from "../layout/header/Cart";
-import MyAccountButton from "../layout/header/MyAccountButton";
-import SearchInput from "../product/productListControls/SearchInput";
+
+import Cart from "./Cart.tsx";
+import MyAccountButton from "./MyAccountButton.tsx";
+import SearchInput from "../../product/productListControls/SearchInput.tsx";
 
 const AppHeaderActions = () => {
 	return (

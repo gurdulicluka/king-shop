@@ -1,8 +1,8 @@
 import { Group, Box, Menu, Button } from "@mantine/core";
 import { CaretDown } from "@phosphor-icons/react";
-import { useGetProductCategoryList } from "../../api/endpoints/product/productEndpoints";
+import { useGetProductCategoryList } from "../../../api/endpoints/product/productEndpoints";
 
-const AppHeaderMenu = () => {
+const CategoryFilter = () => {
 	const { data, isLoading, isFetching } = useGetProductCategoryList();
 
 	return (
@@ -12,7 +12,7 @@ const AppHeaderMenu = () => {
 					<Button
 						loading={isLoading || isFetching}
 						rightSection={<CaretDown size={16} />}
-						variant="light"
+						variant="subtle"
 						color="blue"
 						size="xs"
 					>
@@ -31,4 +31,4 @@ const AppHeaderMenu = () => {
 	);
 };
 
-export default AppHeaderMenu;
+export default CategoryFilter;

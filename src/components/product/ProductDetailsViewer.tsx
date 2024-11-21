@@ -1,6 +1,7 @@
-import { Box, Button, Image, Modal, Stack } from "@mantine/core";
+import { Box, Button, Image, Modal } from "@mantine/core";
 import { useState } from "react";
 import type { Product } from "../../api/endpoints/product/productEndpoints.response";
+import { useMediaQuery } from "@mantine/hooks";
 
 type ProductDetailsViewerProps = {
 	product: Product;
@@ -8,6 +9,9 @@ type ProductDetailsViewerProps = {
 
 const ProductDetailsViewer = ({ product }: ProductDetailsViewerProps) => {
 	const [isModalOpen, setIsModalOpen] = useState(false);
+	const isMobile = useMediaQuery("(max-width: 50em)");
+
+	const { title, images, brand, category, description, rating, price, availabilityStatus } = product;
 
 	const handleOpenModal = () => {
 		setIsModalOpen(true);
@@ -19,20 +23,20 @@ const ProductDetailsViewer = ({ product }: ProductDetailsViewerProps) => {
 
 	return (
 		<>
-			<Button onClick={handleOpenModal} color="dark" radius="xl" size="xs" fw="bold">
+			<Button onClick={handleOpenModal} color="dark" variant="filled" radius="xl" size="xs" fw="bold">
 				Details
 			</Button>
 			<Modal
 				opened={isModalOpen}
 				removeScrollProps={{ allowPinchZoom: true }}
 				onClose={handleCloseModal}
+				fullScreen={isMobile}
+				transitionProps={{ transition: "fade", duration: 200 }}
 				title={product.title}
 				centered
 			>
 				<Box>
-					<Stack>
-						<Image h={300} alt={product.title} fit="cover" src={product.images[0]} />
-					</Stack>
+					<Image h={300} alt={product.title} fit="contain" src={product.images[0]} />
 				</Box>
 			</Modal>
 		</>

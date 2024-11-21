@@ -1,7 +1,7 @@
 import { TextInput } from "@mantine/core";
 import { MagnifyingGlass } from "@phosphor-icons/react";
 
-const AppHeaderSearch = () => {
+const SearchInput = () => {
 	return (
 		<TextInput
 			mt="md"
@@ -13,11 +13,11 @@ const AppHeaderSearch = () => {
 			styles={{
 				root: {
 					"--mantine-spacing-md": "0px", // Override the global variable locally
-					width: "280px",
+					width: "340px",
 				},
 			}}
 		/>
 	);
 };
 
-export default AppHeaderSearch;
+export default SearchInput;
