@@ -1,6 +1,5 @@
 import { Group, Title } from "@mantine/core";
 import SortByFilter from "./SortByFilter";
-import PriceRangeFilter from "./PriceRangeFilter";
 
 type ProductListControlBarProps = {
 	title?: string;
@@ -16,7 +15,7 @@ const ProductListControlBar = ({ title }: ProductListControlBarProps) => {
 			)}
 			<Group mb={14}>
 				<SortByFilter />
-				<PriceRangeFilter />
+				{/* <PriceRangeFilter /> */}
 			</Group>
 		</Group>
 	);

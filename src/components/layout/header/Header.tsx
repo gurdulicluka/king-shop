@@ -5,7 +5,7 @@ import { NavLink } from "react-router-dom";
 
 const Header = () => {
 	return (
-		<AppShell.Header>
+		<AppShell.Header miw={345}>
 			<Group h="100%" justify="space-between" px={20}>
 				<NavLink to="/" style={{ height: "fit", display: "grid", placeItems: "center" }}>
 					<KingLogo width={140} />

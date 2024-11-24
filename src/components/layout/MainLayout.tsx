@@ -6,7 +6,7 @@ import PageLoadingSpinner from "../indicator/PageLoadingSpinner";
 
 const MainLayout = () => {
 	return (
-		<AppShell padding="xl" header={{ height: 60 }}>
+		<AppShell miw={345} padding="xl" header={{ height: 60 }}>
 			<Header />
 			<AppShell.Main>
 				<Suspense fallback={<PageLoadingSpinner />}>

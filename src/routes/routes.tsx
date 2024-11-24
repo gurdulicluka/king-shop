@@ -1,16 +1,13 @@
 import { createRoutesFromElements, Route } from "react-router-dom";
 import MainLayout from "../components/layout/MainLayout";
-import { Homepage, ProductCategoryResultPage, ProductSearchResultPage } from "./lazyRoutes";
+import { Homepage, LoginPage, ProductCategoryResultPage, ProductSearchResultPage } from "./lazyRoutes";
 
 const routes = createRoutesFromElements(
 	<Route>
-		{/* ------------------------------- LOGIN ROUTE ------------------------------ */}
-		{/* <Route path="/login">
-            <Route index element={<LoginPage />} />
-			</Route> */}
-		{/* ------------------------------- APP ROUTES ------------------------------- */}
-		{/* <Route element={<ProtectedRoute />}> */}
 		<Route path="/" element={<MainLayout />}>
+			{/* Login */}
+			<Route path="login" element={<LoginPage />} />
+
 			{/* Homepage show all products */}
 			<Route index element={<Homepage />} />
 
@@ -19,11 +16,9 @@ const routes = createRoutesFromElements(
 
 			{/* Category page show products by category */}
 			<Route path="category/:categoryName" element={<ProductCategoryResultPage />} />
-
-			{/* Fallback page not found route */}
-			<Route path="*" element={<div>PAGE NOT FOUND</div>} />
 		</Route>
-		{/* </Route> */}
+		{/* Fallback page not found route */}
+		<Route path="*" element={<div>PAGE NOT FOUND</div>} />
 	</Route>,
 );
 

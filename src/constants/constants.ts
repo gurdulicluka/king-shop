@@ -1,0 +1,3 @@
+const TOKEN_EXPIRY_MINUTES = 30;
+
+export { TOKEN_EXPIRY_MINUTES };

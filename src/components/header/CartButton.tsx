@@ -1,7 +1,7 @@
 import { ActionIcon } from "@mantine/core";
 import { ShoppingBag } from "@phosphor-icons/react";
 
-const Cart = () => {
+const CartButton = () => {
 	return (
 		<ActionIcon size="lg" variant="subtle" color="#171717">
 			<ShoppingBag size={22} />
@@ -9,4 +9,4 @@ const Cart = () => {
 	);
 };
 
-export default Cart;
+export default CartButton;

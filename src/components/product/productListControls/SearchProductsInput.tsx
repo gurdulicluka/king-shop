@@ -1,23 +1,18 @@
-import { TextInput } from "@mantine/core";
+import { useForm } from "react-hook-form";
+import { useLocation, useNavigate } from "react-router-dom";
+import InputText from "../../form/InputText";
 import { MagnifyingGlass } from "@phosphor-icons/react";
-import { useController, useForm } from "react-hook-form";
-import { useLocation, useNavigate, useSearchParams } from "react-router-dom";
+import useMutateSearchParams from "../../../hooks/useMutateSearchParams";
 
 type SearchData = {
 	search: string;
 };
 
 const SearchProductsInput = () => {
-	const { control, handleSubmit, reset: resetForm } = useForm<SearchData>();
-	const { pathname } = useLocation();
-	const [_, setSearchParams] = useSearchParams();
 	const navigate = useNavigate();
-
-	const { field } = useController({
-		name: "search",
-		control,
-		defaultValue: "",
-	});
+	const { pathname } = useLocation();
+	const { updateSearchParams } = useMutateSearchParams();
+	const { control, handleSubmit, reset: resetForm } = useForm<SearchData>({ defaultValues: { search: "" } });
 
 	const onSubmit = (data: SearchData) => {
 		// If no value in search input do early return
@@ -30,7 +25,7 @@ const SearchProductsInput = () => {
 
 		// If already on search results page change params instead of navigating
 		if (pathname === "/search") {
-			setSearchParams({ q: data.search });
+			updateSearchParams({ q: data.search });
 			return;
 		}
 
@@ -39,10 +34,9 @@ const SearchProductsInput = () => {
 
 	return (
 		<form onSubmit={handleSubmit(onSubmit)}>
-			<TextInput
-				{...field}
-				mt="md"
-				radius="xl"
+			<InputText
+				name="search"
+				control={control}
 				rightSectionPointerEvents="none"
 				rightSection={<MagnifyingGlass size={22} />}
 				placeholder="Search products"
