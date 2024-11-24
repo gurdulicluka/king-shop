@@ -1,11 +1,16 @@
+import type { Product } from "../../api/endpoints/product/types/productEndpoints.response.ts";
 import ProductListControlBar from "./productListControls/ProductListControlBar.tsx";
 import ProductListGrid from "./ProductListGrid.tsx";
 
-const ProductList = () => {
+type ProductListProps = {
+	products: Product[];
+};
+
+const ProductList = ({ products }: ProductListProps) => {
 	return (
 		<>
 			<ProductListControlBar />
-			<ProductListGrid />
+			<ProductListGrid products={products} />
 		</>
 	);
 };

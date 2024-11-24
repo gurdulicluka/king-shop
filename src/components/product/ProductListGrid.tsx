@@ -1,18 +1,17 @@
-import { SimpleGrid, LoadingOverlay } from "@mantine/core";
-import { useProductsFilter } from "../../api/endpoints/product/productEndpoints";
+import { SimpleGrid } from "@mantine/core";
 import ProductCard from "./ProductCard";
+import type { Product } from "../../api/endpoints/product/types/productEndpoints.response";
 
-const ProductListGrid = () => {
-	const { data: products, isLoading, isError } = useProductsFilter({ limit: 20 });
+type ProductListGridProps = {
+	products: Product[];
+};
 
-	if (isError) {
-		return <div>Error loading products</div>;
-	}
-
+const ProductListGrid = ({ products }: ProductListGridProps) => {
 	return (
 		<SimpleGrid cols={{ base: 1, xs: 2, md: 3, lg: 4 }} spacing="md" verticalSpacing="xl" pos="relative">
-			<LoadingOverlay visible={isLoading} zIndex={1000} overlayProps={{ radius: "sm", blur: 2 }} />
-			{!isLoading && products?.products?.map((product) => <ProductCard key={product.id} product={product} />)}
+			{products?.map((product) => (
+				<ProductCard key={product.id} product={product} />
+			))}
 		</SimpleGrid>
 	);
 };

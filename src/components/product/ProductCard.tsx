@@ -1,5 +1,5 @@
-import { Card, Image, Text, Group, Badge, Stack, Rating } from "@mantine/core";
-import type { Product } from "../../api/endpoints/product/productEndpoints.response";
+import { Card, Image, Text, Group, Stack, Title, Divider, Center } from "@mantine/core";
+import type { Product } from "../../api/endpoints/product/types/productEndpoints.response";
 import ProductDetailsViewer from "./ProductDetailsViewer";
 
 type ProductCardProps = {
@@ -7,46 +7,36 @@ type ProductCardProps = {
 };
 
 const ProductCard = ({ product }: ProductCardProps) => {
-	const { title, price, rating, description, thumbnail, brand } = product;
+	const { title, price, description, thumbnail } = product;
 
 	return (
 		<>
 			<Card p="sm" radius="md" withBorder shadow="xs">
 				{/* Product thumbnail and brand badge */}
 				<Card.Section pos="relative">
-					<Badge pos="absolute" top={14} left={16} variant="white" color="dark" size="xs">
-						{brand}
-					</Badge>
-					<Image src={thumbnail} alt={title} h={200} fit="cover" />
+					<Center>
+						<Image src={thumbnail} alt={title} h={320} maw={300} fit="contain" />
+					</Center>
+					<Divider />
 				</Card.Section>
 
 				<Stack mt="md">
 					{/* Title  */}
-					<Stack gap={5}>
-						<Text size="md" lineClamp={1}>
-							{title}
-						</Text>
-					</Stack>
+					<Title size="md" order={3} lineClamp={1}>
+						{title}
+					</Title>
 
 					{/* Description */}
-					<Stack>
-						<Text size="sm" c="dimmed" lineClamp={2}>
-							{description.length > 100 ? `${description.slice(0, 100)}...` : description}
-						</Text>
-						<Group align="center" gap={5}>
-							<Rating size="xs" value={rating} />
-							<Text size="xs" lh={0} fw="lighter">
-								{`(${rating})`}
-							</Text>
-						</Group>
-					</Stack>
+					<Text size="sm" c="dimmed" lineClamp={2}>
+						{description.length > 100 ? `${description.slice(0, 100)}...` : description}
+					</Text>
 
 					{/* Price and see details */}
 					<Group justify="space-between" mt="sm">
-						<ProductDetailsViewer product={product} />
 						<Text size="lg" c="teal">
 							${price.toFixed(2)}
 						</Text>
+						<ProductDetailsViewer product={product} />
 					</Group>
 				</Stack>
 			</Card>

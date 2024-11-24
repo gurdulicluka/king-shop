@@ -11,7 +11,7 @@ const PriceRangeFilter = () => {
 
 	return (
 		<Group>
-			<Menu transitionProps={{ transition: "scale-y" }} trigger="hover" position="bottom-start">
+			<Menu transitionProps={{ transition: "scale-y" }} trigger="click-hover" position="bottom-start">
 				<Menu.Target>
 					<Button leftSection={<Coins size={16} />} variant="subtle" color="gray" size="xs">
 						Price range

@@ -1,6 +1,6 @@
 import { Box, Button, Image, Modal } from "@mantine/core";
 import { useState } from "react";
-import type { Product } from "../../api/endpoints/product/productEndpoints.response";
+import type { Product } from "../../api/endpoints/product/types/productEndpoints.response";
 import { useMediaQuery } from "@mantine/hooks";
 
 type ProductDetailsViewerProps = {

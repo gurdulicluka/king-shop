@@ -1,9 +1,16 @@
-import { Group, Box, Menu, Button } from "@mantine/core";
+import { Group, Menu, Button, SimpleGrid, Text } from "@mantine/core";
 import { CaretDown } from "@phosphor-icons/react";
 import { useGetProductCategoryList } from "../../../api/endpoints/product/productEndpoints";
+import { useNavigate } from "react-router-dom";
 
 const CategoryFilter = () => {
 	const { data, isLoading, isFetching } = useGetProductCategoryList();
+
+	const navigate = useNavigate();
+
+	const handleNavigate = (category: string) => {
+		return () => navigate(`/category/${category}`);
+	};
 
 	return (
 		<Group>
@@ -13,18 +20,22 @@ const CategoryFilter = () => {
 						loading={isLoading || isFetching}
 						rightSection={<CaretDown size={16} />}
 						variant="subtle"
-						color="blue"
+						color="yellow"
 						size="xs"
 					>
 						Categories
 					</Button>
 				</Menu.Target>
-				<Menu.Dropdown>
-					<Box>
+				<Menu.Dropdown style={{ width: "100%" }}>
+					<SimpleGrid cols={{ base: 1, sm: 2, lg: 4 }} verticalSpacing="xs" py={14}>
 						{data?.map((category) => {
-							return <Menu.Item key={category.slug}>{category.name}</Menu.Item>;
+							return (
+								<Menu.Item onClick={handleNavigate(category.slug)} key={category.slug}>
+									<Text size="sm">{category.name}</Text>
+								</Menu.Item>
+							);
 						}) ?? []}
-					</Box>
+					</SimpleGrid>
 				</Menu.Dropdown>
 			</Menu>
 		</Group>

@@ -1,14 +1,23 @@
-import { Group } from "@mantine/core";
-import CategoryFilter from "./CategoryFilter";
+import { Group, Title } from "@mantine/core";
 import SortByFilter from "./SortByFilter";
 import PriceRangeFilter from "./PriceRangeFilter";
 
-const ProductListControlBar = () => {
+type ProductListControlBarProps = {
+	title?: string;
+};
+
+const ProductListControlBar = ({ title }: ProductListControlBarProps) => {
 	return (
-		<Group mb={14}>
-			<CategoryFilter />
-			<SortByFilter />
-			<PriceRangeFilter />
+		<Group justify={title ? "space-between" : "end"} align="start">
+			{title && (
+				<Title order={1} size="md">
+					{title}
+				</Title>
+			)}
+			<Group mb={14}>
+				<SortByFilter />
+				<PriceRangeFilter />
+			</Group>
 		</Group>
 	);
 };
