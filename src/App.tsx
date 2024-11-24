@@ -1,14 +1,24 @@
-import { AppShell } from "@mantine/core";
 import {} from "@phosphor-icons/react";
-import Header from "./components/layout/header/Header";
-import Content from "./components/layout/content/Content";
+import { Router } from "./routes/Router";
+import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
+import { createTheme, MantineProvider } from "@mantine/core";
+import "./styles/fonts.css";
+import "@mantine/core/styles.css";
 
+// TODO Auth provider
+const queryClient = new QueryClient();
+
+const theme = createTheme({
+	fontFamily: "Poppins, sans-serif",
+	headings: { fontFamily: "Poppins, sans-serif" },
+});
 function App() {
 	return (
-		<AppShell padding="md" header={{ height: 60 }}>
-			<Header />
-			<Content />
-		</AppShell>
+		<QueryClientProvider client={queryClient}>
+			<MantineProvider theme={theme}>
+				<Router />
+			</MantineProvider>
+		</QueryClientProvider>
 	);
 }
 
