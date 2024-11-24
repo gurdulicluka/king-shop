@@ -7,8 +7,9 @@ const useProductQueryParams = () => {
 	const skip = searchParams.skip || "0";
 	const order = searchParams.order;
 	const sortBy = searchParams.sortBy;
+	const search = searchParams.q;
 
-	return { limit, skip, order, sortBy };
+	return { limit, skip, order, sortBy, search };
 };
 
 export default useProductQueryParams;
