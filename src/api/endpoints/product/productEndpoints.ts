@@ -1,15 +1,21 @@
 import { useQuery } from "@tanstack/react-query";
 
 import { httpClient } from "../../api.client";
-import type { ProductCategoryListResponse, ProductListResponse } from "./productEndpoints.response";
-import type { ProductListRequest, ProductListSearchRequest } from "./productEndpoints.request";
+import type { ProductCategoryListResponse, ProductListResponse } from "./types/productEndpoints.response";
+import type {
+	AllProductsRequest,
+	ProductListByCategoryRequest,
+	ProductListSearchRequest,
+	Query,
+} from "./types/productEndpoints.request";
 import { createQueryString } from "../../../utils/createQueryString";
 
-const useProductsFilter = (params?: ProductListRequest) => {
+const useGetAllProducts = (request: AllProductsRequest) => {
+	const { query } = request;
 	return useQuery<ProductListResponse, Error>({
-		queryKey: ["products", params],
+		queryKey: ["products", query],
 		queryFn: async () => {
-			const queryString = createQueryString<ProductListRequest>(params);
+			const queryString = createQueryString<Query>(query);
 
 			const response = await httpClient.get<ProductListResponse>(`/products${queryString}`);
 			return response.data;
@@ -17,13 +23,32 @@ const useProductsFilter = (params?: ProductListRequest) => {
 	});
 };
 
-const useProductsSearch = (params?: ProductListSearchRequest) => {
+const useProductsSearch = (request: ProductListSearchRequest) => {
+	const { q: search, query } = request;
 	return useQuery<ProductListResponse, Error>({
-		queryKey: ["productSearch", params],
+		queryKey: ["productSearch", search, query],
 		queryFn: async () => {
-			const queryString = createQueryString<ProductListSearchRequest>(params);
+			const queryString = createQueryString<{ q: string }>({
+				...query,
+				q: search,
+			} satisfies Query & { q: string });
 
 			const response = await httpClient.get<ProductListResponse>(`/products/search${queryString}`);
+			return response.data;
+		},
+	});
+};
+
+const useGetProductsByCategory = (request: ProductListByCategoryRequest) => {
+	const { category, query } = request;
+	return useQuery<ProductListResponse, Error>({
+		queryKey: ["categoryProducts", category, query],
+		queryFn: async () => {
+			const queryString = createQueryString<Query>(query);
+
+			const response = await httpClient.get<ProductListResponse>(
+				`/products/category/${category}${queryString}`,
+			);
 			return response.data;
 		},
 	});
@@ -39,14 +64,4 @@ const useGetProductCategoryList = () => {
 	});
 };
 
-const useGetProductsByCategory = (category: string) => {
-	return useQuery<ProductCategoryListResponse, Error>({
-		queryKey: ["categoryProducts", category],
-		queryFn: async () => {
-			const response = await httpClient.get<ProductCategoryListResponse>(`/products/categories/${category}`);
-			return response.data;
-		},
-	});
-};
-
-export { useProductsFilter, useProductsSearch, useGetProductCategoryList, useGetProductsByCategory };
+export { useGetAllProducts, useProductsSearch, useGetProductCategoryList, useGetProductsByCategory };
