@@ -17,7 +17,9 @@ const MyAccountButton = ({ closeDrawerFn }: MyAccountButtonProps) => {
 	};
 
 	const handleLogin = () => {
-		closeDrawerFn();
+		if (closeDrawerFn) {
+			closeDrawerFn();
+		}
 		navigate("/login");
 	};
 

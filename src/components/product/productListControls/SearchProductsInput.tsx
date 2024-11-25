@@ -22,7 +22,10 @@ const SearchProductsInput = ({ closeDrawerFn }: SearchProductsInputProps) => {
 	const onSubmit = (data: SearchData) => {
 		// If no value in search input do early return
 		if (!data.search) return;
-		closeDrawerFn();
+
+		if (closeDrawerFn) {
+			closeDrawerFn();
+		}
 
 		// Reset input value on each submission for better UX
 		resetForm({
