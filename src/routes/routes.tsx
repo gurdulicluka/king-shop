@@ -1,4 +1,4 @@
-import { createRoutesFromElements, Route } from "react-router-dom";
+import { Route, createRoutesFromElements } from "react-router-dom";
 import MainLayout from "../components/layout/MainLayout";
 import { Homepage, LoginPage, ProductCategoryResultPage, ProductSearchResultPage } from "./lazyRoutes";
 

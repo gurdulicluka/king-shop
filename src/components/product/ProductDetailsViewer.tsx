@@ -1,4 +1,4 @@
-import { Box, Button, Divider, Group, Image, Modal, Rating, Stack, Text, Title } from "@mantine/core";
+import { Box, Button, Divider, Flex, Group, Image, Modal, Rating, Stack, Text, Title } from "@mantine/core";
 import { useMediaQuery } from "@mantine/hooks";
 import { useState } from "react";
 import type { Product } from "../../api/endpoints/product/types/productEndpoints.response";
@@ -33,29 +33,34 @@ const ProductDetailsViewer = ({ product }: ProductDetailsViewerProps) => {
 				fullScreen={isMobile}
 				transitionProps={{ transition: "fade", duration: 200 }}
 				centered
+				styles={{ body: { height: "90%" } }}
 			>
-				<Stack>
+				<Stack styles={{ root: { height: "100%" } }}>
 					<Box>
 						<Image h={280} alt={product.title} fit="contain" src={product.images[0]} />
 					</Box>
 					<Divider />
-					<Stack>
-						<Rating value={rating} fractions={2} readOnly />
-						<Title order={4}>{title}</Title>
-						<Text size="sm">{description}</Text>
-						<Group justify="space-between" mt="sm">
-							<Text c="dark">{`In stock: ${stock}`}</Text>
-							<Text size="xl" c="teal">
-								${price.toFixed(2)}
-							</Text>
-						</Group>
+					<Flex flex={1} justify={{ base: "space-between", sm: "center" }} direction="column">
 						<Stack>
-							<Button fullWidth bg="dark">
-								Buy now
-							</Button>
-							<Button fullWidth>Add to cart</Button>
+							<Rating value={rating} fractions={2} readOnly />
+							<Title order={4}>{title}</Title>
+							<Text size="sm">{description}</Text>
 						</Stack>
-					</Stack>
+						<Stack>
+							<Group justify="space-between" mt="sm">
+								<Text c="dark">{`In stock: ${stock}`}</Text>
+								<Text size="xl" c="teal">
+									${price.toFixed(2)}
+								</Text>
+							</Group>
+							<Stack>
+								<Button fullWidth bg="dark">
+									Buy now
+								</Button>
+								<Button fullWidth>Add to cart</Button>
+							</Stack>
+						</Stack>
+					</Flex>
 				</Stack>
 			</Modal>
 		</>
