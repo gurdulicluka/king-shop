@@ -1,20 +1,30 @@
 import { ActionIcon, Avatar, Box, Button, Group, Menu, Stack, Text } from "@mantine/core";
-import type { LocalStorageUser } from "../../types/localStorage.types";
 import { useNavigate } from "react-router-dom";
 import useLocalStorage from "../../hooks/useLocalStorage";
+import type { LocalStorageUser } from "../../types/localStorage.types";
 
-const MyAccountButton = () => {
+type MyAccountButtonProps = {
+	closeDrawerFn?: () => void;
+};
+
+const MyAccountButton = ({ closeDrawerFn }: MyAccountButtonProps) => {
 	const { getItem, setItem } = useLocalStorage();
 	const user = getItem<LocalStorageUser>("user");
 
 	const handleLogout = () => {
 		setItem("user", null);
+		closeDrawerFn();
+	};
+
+	const handleLogin = () => {
+		closeDrawerFn();
+		navigate("/login");
 	};
 
 	const navigate = useNavigate();
 
 	return !user ? (
-		<Button radius="xl" onClick={() => navigate("/login")} component="a" size="xs">
+		<Button radius="xl" onClick={handleLogin} component="a" size="xs">
 			Login
 		</Button>
 	) : (

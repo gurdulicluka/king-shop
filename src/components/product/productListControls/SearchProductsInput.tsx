@@ -1,14 +1,19 @@
+import { ActionIcon } from "@mantine/core";
+import { MagnifyingGlass } from "@phosphor-icons/react";
 import { useForm } from "react-hook-form";
 import { useLocation, useNavigate } from "react-router-dom";
-import InputText from "../../form/InputText";
-import { MagnifyingGlass } from "@phosphor-icons/react";
 import useMutateSearchParams from "../../../hooks/useMutateSearchParams";
+import InputText from "../../form/InputText";
 
 type SearchData = {
 	search: string;
 };
 
-const SearchProductsInput = () => {
+type SearchProductsInputProps = {
+	closeDrawerFn?: () => void;
+};
+
+const SearchProductsInput = ({ closeDrawerFn }: SearchProductsInputProps) => {
 	const navigate = useNavigate();
 	const { pathname } = useLocation();
 	const { updateSearchParams } = useMutateSearchParams();
@@ -17,6 +22,7 @@ const SearchProductsInput = () => {
 	const onSubmit = (data: SearchData) => {
 		// If no value in search input do early return
 		if (!data.search) return;
+		closeDrawerFn();
 
 		// Reset input value on each submission for better UX
 		resetForm({
@@ -33,18 +39,21 @@ const SearchProductsInput = () => {
 	};
 
 	return (
-		<form onSubmit={handleSubmit(onSubmit)}>
+		<form style={{ width: "100%" }} onSubmit={handleSubmit(onSubmit)}>
 			<InputText
 				name="search"
 				control={control}
-				rightSectionPointerEvents="none"
-				rightSection={<MagnifyingGlass size={22} />}
+				rightSection={
+					<ActionIcon type="submit" variant="transparent" c="gray">
+						<MagnifyingGlass size={22} />
+					</ActionIcon>
+				}
 				placeholder="Search products"
 				variant="filled"
 				styles={{
 					root: {
 						"--mantine-spacing-md": "0px",
-						width: "340px",
+						width: "100%",
 					},
 				}}
 			/>

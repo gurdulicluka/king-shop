@@ -1,18 +1,28 @@
-import { Menu, Button, SimpleGrid, Text } from "@mantine/core";
+import { Button, Menu, SimpleGrid, Stack, Text, Title } from "@mantine/core";
 import { CaretDown } from "@phosphor-icons/react";
-import { useGetProductCategoryList } from "../../../api/endpoints/product/productEndpoints";
 import { useNavigate } from "react-router-dom";
+import { useGetProductCategoryList } from "../../../api/endpoints/product/productEndpoints";
 
-const CategoryFilter = () => {
+type CategoryOptionsProps = {
+	variant: "drawer" | "menu";
+	closeDrawerFn?: () => void;
+};
+
+const CategoryOptions = ({ variant, closeDrawerFn }: CategoryOptionsProps) => {
 	const { data, isLoading, isFetching } = useGetProductCategoryList();
 
 	const navigate = useNavigate();
 
 	const handleNavigate = (category: string) => {
-		return () => navigate(`/category/${category}`);
+		return () => {
+			if (closeDrawerFn) {
+				closeDrawerFn();
+			}
+			navigate(`/category/${category}`);
+		};
 	};
 
-	return (
+	return variant === "menu" ? (
 		<Menu transitionProps={{ transition: "scale-y" }} trigger="hover" position="bottom-start">
 			<Menu.Target>
 				<Button
@@ -37,7 +47,20 @@ const CategoryFilter = () => {
 				</SimpleGrid>
 			</Menu.Dropdown>
 		</Menu>
+	) : (
+		<Stack>
+			<Title mt={14} order={4}>
+				Categories
+			</Title>
+			{data?.map((category) => {
+				return (
+					<Button variant="light" component="a" onClick={handleNavigate(category.slug)} key={category.slug}>
+						<Text size="sm">{category.name}</Text>
+					</Button>
+				);
+			}) ?? []}
+		</Stack>
 	);
 };
 
-export default CategoryFilter;
+export default CategoryOptions;

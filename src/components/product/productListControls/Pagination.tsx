@@ -39,6 +39,7 @@ const Pagination = (props: PaginationPropType) => {
 			<Group align="center" mt={80} mb={40} justify="center">
 				<MantinePagination siblings={0} total={totalPages} value={page} onChange={handleOnChangePage} />
 				<Select
+					hidden={totalItems === 0}
 					checkIconPosition="right"
 					data={["20", "50", "100"]}
 					onChange={handleChangePageSize}

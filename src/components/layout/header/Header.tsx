@@ -1,7 +1,8 @@
-import { AppShell, Group } from "@mantine/core";
-import KingLogo from "../../icons/KingLogo";
-import AppHeaderActions from "../../header/AppHeaderActions";
+import { AppShell, Center, Group } from "@mantine/core";
 import { NavLink } from "react-router-dom";
+import AppHeaderActions from "../../header/AppHeaderActions";
+import MobileDrawer from "../../header/MobileDrawer";
+import KingLogo from "../../icons/KingLogo";
 
 const Header = () => {
 	return (
@@ -10,7 +11,12 @@ const Header = () => {
 				<NavLink to="/" style={{ height: "fit", display: "grid", placeItems: "center" }}>
 					<KingLogo width={140} />
 				</NavLink>
-				<AppHeaderActions />
+				<Center visibleFrom="md">
+					<AppHeaderActions />
+				</Center>
+				<Center hiddenFrom="md">
+					<MobileDrawer />
+				</Center>
 			</Group>
 		</AppShell.Header>
 	);
