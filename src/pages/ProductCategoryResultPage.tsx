@@ -1,9 +1,9 @@
+import { useParams } from "react-router-dom";
 import { useGetProductsByCategory } from "../api/endpoints/product/productEndpoints";
 import PageLoadingSpinner from "../components/indicator/PageLoadingSpinner";
-import ProductListControlBar from "../components/product/productListControls/ProductListControlBar";
 import ProductListGrid from "../components/product/ProductListGrid";
-import { useParams } from "react-router-dom";
-import Pagination from "../components/Pagination";
+import Pagination from "../components/product/productListControls/Pagination";
+import ProductListControlBar from "../components/product/productListControls/ProductListControlBar";
 import useProductQueryParams from "../hooks/useProductQueryParams";
 
 const ProductCategoryResultPage = () => {

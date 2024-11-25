@@ -1,8 +1,8 @@
-import PageLoadingSpinner from "../components/indicator/PageLoadingSpinner";
-import ProductListControlBar from "../components/product/productListControls/ProductListControlBar";
-import ProductListGrid from "../components/product/ProductListGrid";
 import { useGetAllProducts } from "../api/endpoints/product/productEndpoints";
-import Pagination from "../components/Pagination";
+import PageLoadingSpinner from "../components/indicator/PageLoadingSpinner";
+import ProductListGrid from "../components/product/ProductListGrid";
+import Pagination from "../components/product/productListControls/Pagination";
+import ProductListControlBar from "../components/product/productListControls/ProductListControlBar";
 import useProductQueryParams from "../hooks/useProductQueryParams";
 
 const Homepage = () => {

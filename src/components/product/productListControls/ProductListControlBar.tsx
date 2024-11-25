@@ -7,13 +7,13 @@ type ProductListControlBarProps = {
 
 const ProductListControlBar = ({ title }: ProductListControlBarProps) => {
 	return (
-		<Group justify={title ? "space-between" : "end"} align="start">
+		<Group justify={title ? "space-between" : "end"} align="center" mb={18}>
 			{title && (
 				<Title order={1} size="md">
 					{title}
 				</Title>
 			)}
-			<Group mb={14}>
+			<Group>
 				<SortByFilter />
 				{/* <PriceRangeFilter /> */}
 			</Group>

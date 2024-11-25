@@ -1,4 +1,4 @@
-import { Card, Image, Text, Group, Stack, Title, Divider, Center } from "@mantine/core";
+import { Card, Center, Divider, Group, Image, Stack, Text, Title } from "@mantine/core";
 import type { Product } from "../../api/endpoints/product/types/productEndpoints.response";
 import ProductDetailsViewer from "./ProductDetailsViewer";
 
