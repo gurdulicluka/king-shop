@@ -12,7 +12,7 @@ const ProductCard = ({ product }: ProductCardProps) => {
 	return (
 		<>
 			<Card p="sm" radius="md" withBorder shadow="xs">
-				{/* Product thumbnail and brand badge */}
+				{/* Product thumbnail */}
 				<Card.Section pos="relative">
 					<Center>
 						<Image src={thumbnail} alt={title} h={320} maw={300} fit="contain" />
