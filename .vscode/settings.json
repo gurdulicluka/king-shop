@@ -1,0 +1,23 @@
+{
+	// Automatically format files on save
+	"editor.formatOnSave": true,
+
+	// Set default formatter to Prettier
+	"editor.defaultFormatter": "biomejs.biome",
+
+	// Specify preferred tab size and type
+	"editor.tabSize": 2,
+	"editor.insertSpaces": true,
+
+	// Additional workspace settings (optional)
+	"search.exclude": {
+		"**/dist": true,
+		"**/.git": true
+	},
+
+	// Lint on save
+	"editor.codeActionsOnSave": {
+		"quickfix.biome": "explicit",
+		"source.organizeImports.biome": "explicit"
+	}
+}
